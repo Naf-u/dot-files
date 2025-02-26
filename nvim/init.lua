@@ -759,9 +759,10 @@ else
 			config = function()
 				require("catppuccino").setup(
           { 
-            flavour = "latte", 
-            transparent_background = false
+            flavour = "auto", 
+            transparent_background = true
           })
+      vim.cmd.colorscheme "catppuccin"
 			end,
 		},
 		--[[{
@@ -778,7 +779,6 @@ else
 				})
 			end,
 		},]]--
-		--
 		-- Highlight todo, notes, etc in comments
 		{
 			"folke/todo-comments.nvim",
@@ -811,10 +811,6 @@ else
 				local statusline = require("mini.statusline")
 				-- set use_icons to true if you have a Nerd Font
 				statusline.setup({ use_icons = vim.g.have_nerd_font })
-
-				-- You can configure sections in the statusline by overriding their
-				-- default behavior. For example, here we set the section for
-				-- cursor location to LINE:COLUMN
 				---@diagnostic disable-next-line: duplicate-set-field
 				statusline.section_location = function()
 					return "%2l:%-2v"
@@ -843,13 +839,9 @@ else
 					"vim",
 					"vimdoc",
 				},
-				-- Autoinstall languages that are not installed
 				auto_install = true,
 				highlight = {
 					enable = true,
-					-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-					--  If you are experiencing weird indenting issues, add the language to
-					--  the list of additional_vim_regex_highlighting and disabled languages for indent.
 					additional_vim_regex_highlighting = { "ruby" },
 				},
 				indent = { enable = true, disable = { "ruby" } },
@@ -857,7 +849,6 @@ else
 		},
 		{
 			ui = {
-
 				icons = vim.g.have_nerd_font and {} or {
 					cmd = "⌘",
 					config = "🛠",
@@ -877,3 +868,5 @@ else
 		}
 	)
 end
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
