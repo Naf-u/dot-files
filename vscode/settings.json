@@ -1,0 +1,23 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "glassit.alpha": 245,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "vscode-neovim.useWSL": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "",
+    "vscode-neovim.wslDistribution": "Debian",
+    "workbench.settings.editor": "json",
+    "vscode-neovim.compositeKeys": {
+        "jk": {
+            "command": "vscode-neovim.lua",
+            "args": [
+                [
+                "local code = require('vscode')",
+                "code.action('vscode-neovim.escape')",
+                "code.action('workbench.action.files.save')",
+                ],
+            ],
+        }
+    },
+}
