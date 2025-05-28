@@ -1,0 +1,17 @@
+font-family = JetBrains Mono Nerd Font
+font-size = 12
+
+theme = catppuccin-mocha
+
+cursor-color = #BD93F9
+cursor-text-color = #282A36
+
+scrollback-lines = 10000
+
+# background-opacity = 0.9
+
+visual-bell-duration = 0.0
+
+copy-on-select = clipboard
+
+confirm-close-surface = false
