@@ -129,7 +129,15 @@ require("lazy").setup({
                         },
                 },
         },
-
+        {
+                "seblyng/roslyn.nvim",
+                ft = "cs",
+                ---@module 'roslyn.config'
+                ---@type RoslynNvimConfig
+                opts = {
+                        -- your configuration comes here; leave empty for default settings
+                },
+        },
         { -- Fuzzy Finder (files, lsp, etc)
                 "nvim-telescope/telescope.nvim",
                 event = "VimEnter",
@@ -225,10 +233,17 @@ require("lazy").setup({
                         -- Automatically install LSPs and related tools to stdpath for Neovim
                         -- Mason must be loaded before its dependents so we need to set it up here.
                         -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-                        { "williamboman/mason.nvim", opts = {} },
+                        {
+                                "williamboman/mason.nvim",
+                                opts = {
+                                        registries = {
+                                                "github:mason-org/mason-registry",
+                                                "github:Crashdummyy/mason-registry",
+                                        },
+                                },
+                        },
                         "williamboman/mason-lspconfig.nvim",
                         "WhoIsSethDaniel/mason-tool-installer.nvim",
-
                         -- Useful status updates for LSP.
                         { "j-hui/fidget.nvim", opts = {} },
 
@@ -349,6 +364,20 @@ require("lazy").setup({
                                         end
                                 end,
                         })
+                        vim.lsp.config("roslyn", {
+                                on_attach = function()
+                                        print("This will run when the server attaches!")
+                                end,
+                                settings = {
+                                        ["csharp|inlay_hints"] = {
+                                                csharp_enable_inlay_hints_for_implicit_object_creation = true,
+                                                csharp_enable_inlay_hints_for_implicit_variable_types = true,
+                                        },
+                                        ["csharp|code_lens"] = {
+                                                dotnet_enable_references_code_lens = true,
+                                        },
+                                },
+                        })
 
                         -- Diagnostic Config
                         -- See :help vim.diagnostic.Opts
@@ -398,9 +427,9 @@ require("lazy").setup({
                         local servers = {
                                 clangd = {},
                                 gopls = {},
+                                roslyn = {},
                                 -- pyright = {},
                                 rust_analyzer = {},
-                                omnisharp = {},
                                 --
                                 -- Some languages (like typescript) have entire language plugins that can be useful:
                                 --    https://github.com/pmizio/typescript-tools.nvim
